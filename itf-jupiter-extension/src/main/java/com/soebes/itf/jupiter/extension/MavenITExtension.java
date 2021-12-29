@@ -19,12 +19,38 @@ package com.soebes.itf.jupiter.extension;
  * under the License.
  */
 
+import static com.soebes.itf.jupiter.extension.AnnotationHelper.goals;
+import static com.soebes.itf.jupiter.extension.AnnotationHelper.hasGoals;
+import static com.soebes.itf.jupiter.extension.AnnotationHelper.hasOptions;
+import static com.soebes.itf.jupiter.extension.AnnotationHelper.hasProfiles;
+import static com.soebes.itf.jupiter.extension.AnnotationHelper.hasSystemProperties;
+import static com.soebes.itf.jupiter.extension.AnnotationHelper.options;
+import static com.soebes.itf.jupiter.extension.AnnotationHelper.profiles;
+import static com.soebes.itf.jupiter.extension.AnnotationHelper.systemProperties;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+
 import com.soebes.itf.jupiter.maven.MavenCacheResult;
 import com.soebes.itf.jupiter.maven.MavenExecutionResult;
 import com.soebes.itf.jupiter.maven.MavenExecutionResult.ExecutionResult;
 import com.soebes.itf.jupiter.maven.MavenLog;
 import com.soebes.itf.jupiter.maven.MavenProjectResult;
 import com.soebes.itf.jupiter.maven.ProjectHelper;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Stream;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.model.Model;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
@@ -37,32 +63,6 @@ import org.junit.jupiter.api.extension.InvocationInterceptor;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolver;
 import org.junit.jupiter.api.extension.ReflectiveInvocationContext;
-
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Stream;
-
-import static com.soebes.itf.jupiter.extension.AnnotationHelper.goals;
-import static com.soebes.itf.jupiter.extension.AnnotationHelper.hasGoals;
-import static com.soebes.itf.jupiter.extension.AnnotationHelper.hasOptions;
-import static com.soebes.itf.jupiter.extension.AnnotationHelper.hasProfiles;
-import static com.soebes.itf.jupiter.extension.AnnotationHelper.hasSystemProperties;
-import static com.soebes.itf.jupiter.extension.AnnotationHelper.options;
-import static com.soebes.itf.jupiter.extension.AnnotationHelper.profiles;
-import static com.soebes.itf.jupiter.extension.AnnotationHelper.systemProperties;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
 
 /**
  * @author Karl Heinz Marbaise
@@ -113,10 +113,10 @@ class MavenITExtension implements BeforeEachCallback, ParameterResolver, BeforeT
         directoryResolverResult.getProjectDirectory().mkdirs();
         directoryResolverResult.getCacheDirectory().mkdirs();
 
-        FileUtils.copyDirectory(directoryResolverResult.getSourceMavenProject(),
-            directoryResolverResult.getProjectDirectory());
-        FileUtils.copyDirectory(directoryResolverResult.getTargetItfRepoDirectory(),
-            directoryResolverResult.getCacheDirectory());
+        Files.copy(directoryResolverResult.getSourceMavenProject().toPath(),
+            directoryResolverResult.getProjectDirectory().toPath(), StandardCopyOption.COPY_ATTRIBUTES);
+        Files.copy(directoryResolverResult.getTargetItfRepoDirectory().toPath(),
+            directoryResolverResult.getCacheDirectory().toPath(), StandardCopyOption.COPY_ATTRIBUTES);
       }
     } else {
       FileUtils.deleteQuietly(directoryResolverResult.getProjectDirectory());
