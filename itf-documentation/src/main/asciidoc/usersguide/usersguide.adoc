@@ -2041,7 +2041,7 @@ several executions of integration tests.
 In contradiction the `@MavenProject` gives the option to execute more than
 one integration test on the same project.
 
-The `@MavenProjectSource(source="com/soebes/source-project")`
+The `@MavenProjectSource(sources="com/soebes/source-project")`
 defines the location where to find the project setup for the integration test
 relative to the `src/test/resources-its` directory. This location will
 not change based on package of the integration test class, method or alike.
@@ -2087,7 +2087,7 @@ If you define the integration test like this:
 package com.its;
 
 @MavenJupiterExtension
-@MavenProjectSources(source="com/soebes/source-project")
+@MavenProjectSources(sources="com/soebes/source-project")
 class TheIT {
 
   @MavenTest
@@ -2121,7 +2121,7 @@ by creating a second integration test like this:
 package com.its;
 
 @MavenJupiterExtension
-@MavenProjectSources(source="com/soebes/source-project")
+@MavenProjectSources(sources="com/soebes/source-project")
 class TheIT {
 
   @MavenTest
@@ -2192,22 +2192,22 @@ package com.its;
 class TheIT {
 
   @MavenTest
-  @MavenProjectSources(source="com/soebes/base1")
+  @MavenProjectSources(sources="com/soebes/base1")
   void one(MavenExecutionResult result) {
     ...
   }
   @MavenTest
-  @MavenProjectSources(source="com/soebes/base1")
+  @MavenProjectSources(sources="com/soebes/base1")
   void two(MavenExecutionResult result) {
     ...
   }
   @MavenTest
-  @MavenProjectSources(source="com/soebes/base2")
+  @MavenProjectSources(sources="com/soebes/base2")
   void three(MavenExecutionResult result) {
     ...
   }
   @MavenTest
-  @MavenProjectSources(source="com/soebes/base2")
+  @MavenProjectSources(sources="com/soebes/base2")
   void four(MavenExecutionResult result) {
     ...
   }
@@ -2227,18 +2227,18 @@ package com.its;
 class TheIT {
 
   @MavenTest
-  @MavenProjectSources(source="com/soebes/base1")
+  @MavenProjectSources(sources="com/soebes/base1")
   void one(MavenExecutionResult result) {
     ...
   }
   @MavenTest
-  @MavenProjectSources(source="com/soebes/base1")
+  @MavenProjectSources(sources="com/soebes/base1")
   void two(MavenExecutionResult result) {
     ...
   }
 
   @Nested
-  @MavenProjectSources(source="com/soebes/base-nested")
+  @MavenProjectSources(sources="com/soebes/base-nested")
   class NestedSetup {
     @MavenTest
     void three(MavenExecutionResult result) {
@@ -2265,7 +2265,7 @@ it on a nested class level or on test method level.
 package com.its;
 
 @MavenJupiterExtension
-@MavenProjectSources(source="com/soebes/base1")
+@MavenProjectSources(sources="com/soebes/base1")
 class TheIT {
 
   @MavenTest
@@ -2278,7 +2278,7 @@ class TheIT {
   }
 
   @Nested
-  @MavenProjectSources(source="com/soebes/base-nested")
+  @MavenProjectSources(sources="com/soebes/base-nested")
   class NestedSetup {
     @MavenTest
     void three(MavenExecutionResult result) {
