@@ -187,5 +187,14 @@ public class MavenLogAssert extends AbstractAssert&lt;MavenLogAssert, MavenLog&g
 <span class="fc" id="L187">    return new ListAssert&lt;&gt;(Helper.logs(this.actual.getStdout()));</span>
   }
 
+  /**
+   * Always returns 1.
+   *
+   * @return 1.
+   */
+  @Override
+  public int hashCode() {
+<span class="fc" id="L197">    return 1;</span>
+  }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

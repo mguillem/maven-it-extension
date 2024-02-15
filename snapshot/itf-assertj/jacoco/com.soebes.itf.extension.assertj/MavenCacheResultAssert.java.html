@@ -31,9 +31,9 @@ import static org.apiguardian.api.API.Status.EXPERIMENTAL;
 @API(status = EXPERIMENTAL, since = &quot;0.8.0&quot;)
 public class MavenCacheResultAssert extends AbstractAssert&lt;MavenCacheResultAssert, MavenCacheResult&gt; {
 
-  protected MavenCacheResultAssert(MavenCacheResult actual) {
-<span class="nc" id="L35">    super(actual, MavenCacheResultAssert.class);</span>
-<span class="nc" id="L36">  }</span>
+  MavenCacheResultAssert(MavenCacheResult actual) {
+<span class="fc" id="L35">    super(actual, MavenCacheResultAssert.class);</span>
+<span class="fc" id="L36">  }</span>
 
   /**
    * An entry point for MavenCacheResult to follow AssertJ standard &lt;code&gt;assertThat()&lt;/code&gt; statements.&lt;br&gt;
@@ -46,5 +46,14 @@ public class MavenCacheResultAssert extends AbstractAssert&lt;MavenCacheResultAs
 <span class="nc" id="L46">    return new MavenCacheResultAssert(actual);</span>
   }
 
+  /**
+   * Always returns 1.
+   *
+   * @return 1.
+   */
+  @Override
+  public int hashCode() {
+<span class="fc" id="L56">    return 1;</span>
+  }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

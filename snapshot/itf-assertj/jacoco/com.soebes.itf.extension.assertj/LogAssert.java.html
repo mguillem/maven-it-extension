@@ -50,8 +50,8 @@ public class LogAssert extends AbstractAssert&lt;LogAssert, LogClass&gt; {
    * @param actual {@link LogClass}
    */
   LogAssert(LogClass actual) {
-<span class="nc" id="L53">    super(actual, LogAssert.class);</span>
-<span class="nc" id="L54">  }</span>
+<span class="fc" id="L53">    super(actual, LogAssert.class);</span>
+<span class="fc" id="L54">  }</span>
 
   /**
    * Will give you back the stdout and removes the prefix {@code &quot;[INFO] &quot;} (including the single space) from all lines.
@@ -185,5 +185,15 @@ public class LogAssert extends AbstractAssert&lt;LogAssert, LogClass&gt; {
 <span class="nc" id="L185">    return new ListAssert&lt;&gt;(Helper.logs(this.actual.getLog()));</span>
   }
 
+  /**
+   * Always returns 1.
+   *
+   * @return 1.
+   */
+  @Override
+  public int hashCode() {
+<span class="fc" id="L195">    return 1;</span>
+  }
+
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
